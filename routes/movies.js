@@ -52,18 +52,18 @@ router.post('/:id/delete', (req, res) => {
 })
 
 
-router.get('/movies/:id/edit', (req, res) => {
+router.get('/:id/edit', (req, res) => {
   Movie.findById(req.params.id)
   .then((results) => {
     Celebrity.find()
     .then((celebrities) => {
-      res.render('movies/edit-movie', {results, celeberities})
+      res.render('movies/edit-movie', {results, celebrities})
     })
     .catch(err => console.log(err))
   })
 })
 
-router.post('/movies/:id/edit', (req, res) => {
+router.post('/:id', (req, res) => {
   Movie.findByIdAndUpdate(req.params.id, {
     title: req.body.title,
     genre: req.body.genre,
@@ -71,7 +71,8 @@ router.post('/movies/:id/edit', (req, res) => {
     cast: req.body.cast
   })
   .then((results)=> {
-    res.redirect('/movies')
+    console.log("UPDATEDDDDDDD")
+    res.redirect('/movies/movies')
   })
   .catch(err => console.log)
 })
